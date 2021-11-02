@@ -1,0 +1,51 @@
+﻿
+@using Proj.Mvc.Models
+@model Category
+@{ 
+    ViewData["Title"] = "Category Create";
+}
+
+
+<h1>Create Category Welocome</h1>
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-12 mt-3">
+            <h4>Add Category</h4>
+
+            <form method="post" enctype="multipart/form-data" asp-action="AddCategory" class="mt-2">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <label asp-for="CategoryName" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="CategoryName" class="form-control">
+                        <span asp-validation-for="CategoryName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="MinStockQuantity" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="MinStockQuantity" class="form-control">
+                        <span asp-validation-for="MinStockQuantity" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary form-control">
+                            Add
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Category" class="btn btn-success form-control">Back</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,84 @@
+﻿@using Proj.Mvc.Models
+@model Product
+@{ 
+    ViewData["Title"] = "Product Detail";
+
+    string title = "-";
+    string desc = "-";
+    int qua = 0;
+    string catName = "-";
+    if (Model != null)
+    {
+        if (Model.Title != null)
+        {
+            title = Model.Title;
+        }
+
+        if (Model.Description != null)
+        {
+            desc = Model.Description;
+        }
+
+        if (Model.Quantity > 0)
+        {
+            qua = Model.Quantity;
+        }
+
+        if (Model.Category != null)
+        {
+            catName = Model.Category.CategoryName;
+        }
+    }
+
+}
+<h1>Product Detail Welcome</h1>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 mt-3">
+            <h4> Product Detail</h4>
+            @if (Model != null)
+            {
+                <div class="table-responsive">
+
+                    <table id="mytable" class="table table-bordred table-striped">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>@title</td>
+                                <td>@desc</td>
+                                <td>@qua</td>
+                                <td>@catName</td>
+                                <td><a href="/Update-Product/@Model.Id" class="btn btn-primary btn-sm" data-title="Edit">Edit</a></td>
+                                <td><a href="/Delete-Product/@Model.Id" class="btn btn-danger btn-sm" data-title="Delete">Delete</a></td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <h3>Sorry we can not show detail</h3>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

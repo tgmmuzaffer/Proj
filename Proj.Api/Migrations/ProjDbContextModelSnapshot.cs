@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Proj.Api.Migrations
 {
     [DbContext(typeof(ProjDbContext))]
-    partial class LogiwaDbContextModelSnapshot : ModelSnapshot
+    partial class ProjDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace Proj.Api.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Logiwa.Api.Entity.Category", b =>
+            modelBuilder.Entity("Proj.Api.Entity.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,7 +37,7 @@ namespace Proj.Api.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Logiwa.Api.Entity.Product", b =>
+            modelBuilder.Entity("Proj.Api.Entity.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,16 +63,16 @@ namespace Proj.Api.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Logiwa.Api.Entity.Product", b =>
+            modelBuilder.Entity("Proj.Api.Entity.Product", b =>
                 {
-                    b.HasOne("Logiwa.Api.Entity.Category", "Category")
+                    b.HasOne("Proj.Api.Entity.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Logiwa.Api.Entity.Category", b =>
+            modelBuilder.Entity("Proj.Api.Entity.Category", b =>
                 {
                     b.Navigation("Products");
                 });

@@ -1,0 +1,113 @@
+﻿@using Proj.Mvc.Models
+@{
+    var products = ViewBag.Products as List<Product>;
+    var categories = ViewBag.Categories as List<Category>;
+    var searchkeyword = ViewBag.SearchKeyword;
+    ViewData["Title"] = "Search List";
+    int count = 0;
+    int count1 = 0;
+
+}
+<h1>Product List Welcome</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-3">
+            @if (products != null && products.Count() > 0)
+            {
+                string title = "-";
+                string desc = "-";
+                int qua = 0;
+                string catName = "-";
+                <h4>Result for "@searchkeyword" of Product</h4>
+
+                <div class="table-responsive">
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in products)
+                            {
+                                if (item.Title != null)
+                                {
+                                    title = item.Title;
+                                }
+
+                                if (item.Description != null)
+                                {
+                                    desc = item.Description;
+                                }
+
+                                if (item.Quantity > 0)
+                                {
+                                    qua = item.Quantity;
+                                }
+
+                                if (item.Category != null)
+                                {
+                                    catName = item.Category.CategoryName;
+                                }
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@title</td>
+                                    <td>@desc</td>
+                                    <td>@qua</td>
+                                    <td>@catName</td>
+                                    <td><a href="/Update-Product/@item.Id" class="btn btn-primary btn-sm" data-title="Edit">Edit</a></td>
+                                    <td><a href="/Product-Detail/@item.Id" class="btn btn-warning btn-sm" data-title="Info">Info</a></td>
+                                    <td><a href="/Delete-Product/@item.Id" class="btn btn-danger btn-sm" data-title="Delete">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+            @if (categories != null && categories.Count() > 0)
+            {
+                <h4>Result for "@searchkeyword" of Categories</h4>
+                <div class="table-responsive">
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">Min. Stock Quantity</th>
+                                <th scope="col">Total Product</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in categories)
+                            {
+                                <tr>
+                                    <td>@count1</td>
+                                    <td>@item.CategoryName</td>
+                                    <td>@item.MinStockQuantity</td>
+                                    <td>@item.Products.Count()</td>
+                                    <td><a href="/Update-Category/@item.Id" class="btn btn-primary btn-sm" data-title="Edit">Edit</a></td>
+                                    <td><a href="/Category-Detail/@item.Id" class="btn btn-warning btn-sm" data-title="Info">Info</a></td>
+                                    <td><a href="/Delete-Category/@item.Id" class="btn btn-danger btn-sm" data-title="Delete">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

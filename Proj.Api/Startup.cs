@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Proj.Api.DataAccess;
 using Proj.Api.Repository;
 using Proj.Api.Service;
+using Microsoft.OpenApi.Models;
 using System;
 
 namespace Proj.Api
@@ -45,7 +46,7 @@ namespace Proj.Api
             {
                 s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
-                    Title = "Logiwa API",
+                    Title = "Proj API",
                     Version = "v1",
                     Description = "Code Challange",
                     Contact = new Microsoft.OpenApi.Models.OpenApiContact
@@ -65,10 +66,9 @@ namespace Proj.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Proj v1"));
             }
-
-            app.UseSwagger();
-            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 

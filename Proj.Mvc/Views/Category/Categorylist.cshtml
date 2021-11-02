@@ -1,0 +1,138 @@
+﻿@using Proj.Mvc.Models
+@model ICollection<Category>
+@{
+    ViewData["Title"] = "Category List";
+    int count = 0;
+    int count1 = 0;
+    string shortDesc = "";
+    string catCatName = "";
+    string css = "";
+    var url = ViewBag.Url;
+    var trueOrfalsed = url.Contains("True");
+    var productwithoutcategory = ViewBag.productlist as List<Product>;
+}
+
+<h1>Category List Welcome</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-3">
+
+
+            @if (Model != null && Model.Count() > 0)
+            {
+                @if (trueOrfalsed)
+                {
+                    <h4>All Categories</h4>
+                }
+                else
+                {
+                    <h4> Categories With Non-Zero Stock</h4>
+                }
+                <div class="table-responsive">
+                    <table id="mytable" class="table table-bordred table-striped">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">Min. Stock Quantity</th>
+                                <th scope="col">Total Product</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                if (item.Products.Count() <= 0)
+                                {
+                                    css = "display: none";
+                                }
+                                else
+                                {
+                                    css = "";
+                                }
+                                count++;
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.CategoryName</td>
+                                    <td>@item.MinStockQuantity</td>
+                                    <td>@item.Products.Count()</td>
+                                    <td><a href="/Update-Category/@item.Id" class="btn btn-primary btn-sm" style="@css" data-title="Edit">Edit</a></td>
+                                    <td><a href="/Category-Detail/@item.Id" class="btn btn-warning btn-sm" style="@css" data-title="Info">Info</a></td>
+                                    <td><a href="/Delete-Category/@item.Id" class="btn btn-danger btn-sm"  data-title="Delete">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @if (trueOrfalsed)
+                    {
+                        <a href="/Category-List" class="btn btn-warning btn-sm" data-title="ShowZeroQuantity">Show All</a>
+                    }
+                    else
+                    {
+                        <a href="/Category-List/True" class="btn btn-warning btn-sm" data-title="ShowZeroQuantity">Show Zero</a>
+                    }
+                </div>
+
+                if (productwithoutcategory != null && productwithoutcategory.Count() > 0)
+                {
+                    <h4 style=" margin-top:50px"> Products Without Category </h4>
+                    <div class="table-responsive">
+                        <table id="mytable" class="table table-bordred table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">#</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in productwithoutcategory)
+                                {
+                                    count1++;
+                                    if (item.Description.Length > 99)
+                                    {
+                                        shortDesc = item.Description.Substring(0, 100);
+                                    }
+                                    else
+                                    {
+                                        shortDesc = item.Description;
+                                    }
+                                    if (item.Category == null)
+                                    {
+                                        catCatName = "-";
+                                    }
+                                    <tr>
+                                        <td>@count1</td>
+                                        <td>@item.Title</td>
+                                        <td>@shortDesc</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@catCatName</td>
+                                        <td><a href="/Update-Product/@item.Id" class="btn btn-primary btn-sm" data-title="Edit">Edit</a></td>
+                                        <td><a href="/Product-Detail/@item.Id" class="btn btn-warning btn-sm" data-title="Info">Info</a></td>
+                                        <td><a href="/Delete-Product/@item.Id" class="btn btn-danger btn-sm" data-title="Delete">Delete</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <h4>Sorry nothing to show</h4>
+                </div>
+            }
+        </div>
+    </div>
+</div>

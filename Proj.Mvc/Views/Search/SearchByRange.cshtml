@@ -1,0 +1,74 @@
+﻿@using Proj.Mvc.Models
+@model ICollection<Product>
+@{
+    ViewData["Title"] = "Product List";
+
+    string shortDesc = "";
+    int count = 0;
+}
+<h1>Product List Welcome</h1>
+
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-12 mt-3">
+            <h4>All Products</h4>
+            <hr />
+            <h5>Total Product:  @Model.Count()</h5>
+
+            @if (Model != null && Model.Count() > 0)
+            {
+                <div class="table-responsive">
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                if (item.Description.Length > 99)
+                                {
+                                    shortDesc = item.Description.Substring(0, 100);
+                                }
+                                else
+                                {
+                                    shortDesc = item.Description;
+                                }
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.Title</td>
+                                    <td>@shortDesc</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Category.CategoryName</td>
+                                    <td><a href="/Update-Product/@item.Id" class="btn btn-primary btn-sm" data-title="Edit">Edit</a></td>
+                                    <td><a href="/Product-Detail/@item.Id" class="btn btn-warning btn-sm" data-title="Info">Info</a></td>
+                                    <td><a href="/Delete-Product/@item.Id" class="btn btn-danger btn-sm" data-title="Delete">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <h4>Sorry nothing to show</h4>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+﻿@using Proj.Mvc.Models
+@model Category
+@{
+    ViewData["Title"] = "Edit Category";
+
+    var categorylist = ViewBag.Categorylist as List<Category>;
+    int count = 0;
+    var url = this.Context.Request.Host.Value;
+}
+
+
+
+<h1>Edit Category Welcome</h1>
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-12 mt-3">
+            <h4>Edit Category</h4>
+
+            <form method="post" enctype="multipart/form-data" asp-action="UpdateCategorydetail" class="mt-2">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group row">
+                    <label asp-for="CategoryName" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="CategoryName" class="form-control">
+                        <span asp-validation-for="CategoryName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="MinStockQuantity" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <input asp-for="MinStockQuantity" class="form-control">
+                        <span asp-validation-for="MinStockQuantity" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary form-control">
+                            Update
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <a href="/Category" class="btn btn-success form-control">Back</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    @if (categorylist != null && categorylist.Count() > 0)
+    {
+        <div class="row">
+
+
+            <div class="col-md-12 mt-3">
+
+                <h4> Category List</h4>
+
+
+                <div class="table-responsive">
+
+
+                    <table id="mytable" class="table table-bordred table-striped">
+
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">Min. Stock Quantity</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in categorylist)
+                            {
+                                count++;
+
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.CategoryName</td>
+                                    <td>@item.MinStockQuantity</td>
+                                    <td><a href="/Update-Product/@item.Id" class="btn btn-primary btn-sm" data-title="Edit">Edit</a></td>
+                                    <td><a href="/Product-Detail/@item.Id" class="btn btn-warning btn-sm" data-title="Info">Info</a></td>
+                                    <td><a href="/Delete-Product/@item.Id" class="btn btn-danger btn-sm" data-title="Delete">Delete</a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

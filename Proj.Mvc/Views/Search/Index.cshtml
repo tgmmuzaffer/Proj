@@ -1,0 +1,36 @@
+﻿
+@using Proj.Mvc.Models
+@model Search
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Search </h2>
+<nav class="navbar navbar-light bg-light">
+    <form class="form-inline" method="post" enctype="multipart/form-data" asp-action="Search">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" asp-for="SearchKeyword">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <span asp-validation-for="SearchKeyword" class="text-danger"></span>
+    </form>
+</nav>
+<h2 class="mt-5">Search By Stok Quantity</h2>
+<form style="display:inline-flex" method="post" enctype="multipart/form-data" asp-action="SearchByRange">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col">
+            <input class="form-control" type="number" placeholder="Start Quantity" asp-for="Start">
+            <span asp-validation-for="Start" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <input class="form-control" type="number" placeholder="Finish Quantity" asp-for="Finish">
+            <span asp-validation-for="Finish" class="text-danger"></span>
+        </div>
+        <button class="btn btn-outline-success ml-2 my-2 my-sm-0" type="submit">Search</button>
+
+    </div>
+</form>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

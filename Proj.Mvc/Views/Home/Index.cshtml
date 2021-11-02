@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Merhaba</h1>
+    <h3>Arama sayfası: </h3>
+    <p>Arama sayfasın da iki menu karşılıyor. Kelime ile arama stok miktarı ile arama</p>
+    <p>     -Arama için minimum 3, maximum 20 karaketer girebilirsiniz.zorunlu alandır. Özel karakterlere müsade edilmez. </p>
+    <p>     -Arama sonucu kategorisi olmayanlar getirilmez</p>
+    <p>     -Stok miktarı için başlangıç ve bitiş değerleri yerleri bellidir. Fakat başlangıç değeri bitiş değerinden büyükte olsa senaryoyu cover'lar.</p>
+    <p>     -Değer girilez ise default değer sıfır alır. Bitiş değeri de girilmez ise default deger 1 alınır</p>
+    <p>.</p>
+    <h3>Product sayfası :</h3>
+    <p>Product sayfasında iki ana menu karşılıyor. Listeleme ve oluşturma menuleri</p>
+    <p>     -Oluşturma sayfasında Title, Description, Quantity, Category içeriklerini girebileceğiniz kısımlar bulunuyor.</p>
+    <p>     -Title 3 karakterden altını 200 karakterden üstünü kabul etmez. Diğer alanlar da zorunlu kayıt girmek için.</p>
+    <p>     -İlk kaydınızı girmek için bir kategori oluşturmanız gerekli.</p>
+    <p>     -Listeleme sayfasında. Varsayılan olarak tüm ürünler(kategoriye sahip olmayanlar hariç) gelir.</p>
+    <p>     -Altta ve üstteki butonlardan ürünün ait olduğu kategoriye ait minimum stok adedinin altındaki ürünleri getirmemsini sağlayabilirsiniz.</p>
+    <p>     -Her bir ürüne ait silme, güncelleme, detay sayfaları bulunur. Edit sayfasında da oluşturma sayfasındaki validasyon kuralları geçerlidir. İşlem olumlu ise başarılı olumsuz ise başarısız sayfasına gidersiniz.Başarılı sayfasından detay sayfasına, başarısız sayfasından listelem sayfasına gidebilirsiniz.</p>
+    <p>.</p>
+    <h3>Category sayfası :</h3>
+    <p>Category sayfasında iki ana menu karşılar listelem ve oluşturma</p>
+    <p>     -Oluşturma sayfasında kategori adını ve minimum ürün miktarını belirleyebilirsiniz. </p>
+    <p>     -Kategori adını belirlerken 3 karakterden az 100 karakterden fazla belirleyemezsiniz</p>
+    <p>     -Kategori listeleme sayfasında varsayılan olarak ürün miktarı sıfır olan kategorileri getirmez. Buton ile ürün miktarı sıfır  olanları da görebilirsiniz</p>
+    <p>     -Bu sayfada aynı zamanda kategorisi olmayan ürünlerde getirilir. Bu senaryo dışarda kategorisi belirlenmemiş bir ürün listesinden kayıt girilirse ya da ürünleri olan bir kategori silinmesi durumunu destekler</p>
+    <p>.</p>
+</div>

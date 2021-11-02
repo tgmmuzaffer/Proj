@@ -1,0 +1,64 @@
+﻿@using Proj.Mvc.Models
+@model Category
+@{
+    ViewData["Title"] = "Category Detail";
+    int qua = 0;
+    string catName = "-";
+    if (Model != null)
+    {
+        if (Model.MinStockQuantity > 0)
+        {
+            qua = Model.MinStockQuantity;
+        }
+
+        if (Model.CategoryName != null)
+        {
+            catName = Model.CategoryName;
+        }
+    }
+}
+<h1>Category Detail Welcome</h1>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 mt-3">
+            <h4> Category Detail</h4>
+            @if (Model != null)
+            {
+                <div class="table-responsive">
+
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">Min. Stock Quantity</th>
+                                <th scope="col">#</th>
+                                <th scope="col">#</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>@catName</td>
+                                <td>@qua</td>
+                                <td><a href="/Update-Category/@Model.Id" class="btn btn-primary btn-sm" data-title="Edit">Edit</a></td>
+                                <td><a href="/Delete-Category/@Model.Id" class="btn btn-danger btn-sm" data-title="Delete">Delete</a></td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <h3>Sorry we can not show detail</h3>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
